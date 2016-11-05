@@ -1,8 +1,6 @@
-var words = ['awesome', 'stellar', 'cool'];
-
+var words = ['awesome', 'stellar', 'cool', 'unique', 'sassy', 'wonderful'];
 
 for (var i = 0; i < words.length; i++) {
-
     getPronunciation(words[i]);
 }
 
@@ -18,8 +16,10 @@ function getPronunciation(word) {
         url: queryURL,
         method: 'GET'
     }).done(function(response) {
-        $('#sound').html('<source src="' + response[0].fileUrl + '" type="audio/mp3">');
-        console.log(response[0]);
+
+        var theWord = response[0].fileUrl;
+        $('#sound').append(' <audio controls><source src="' + theWord + '" type="audio/mp3"></audio>');
+
     })
 
 }
