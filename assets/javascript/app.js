@@ -1,8 +1,8 @@
-var words = ['awesome', 'stellar', 'cool', 'unique', 'sassy', 'wonderful'];
+// var words = ['awesome', 'stellar', 'cool', 'unique', 'sassy', 'wonderful', 'interesting', 'talented'];
 
-for (var i = 0; i < words.length; i++) {
-    getPronunciation(words[i]);
-}
+// for (var i = 0; i < words.length; i++) {
+//     getPronunciation(words[i]);
+// }
 
 function getPronunciation(word) {
 
@@ -17,9 +17,32 @@ function getPronunciation(word) {
         method: 'GET'
     }).done(function(response) {
 
-        var theWord = response[0].fileUrl;
-        $('#sound').append(' <audio controls><source src="' + theWord + '" type="audio/mp3"></audio>');
+        var theSound = response[0].fileUrl;
+        var theText = response[0].word;
+        $('#word').append(theText + " ");
+        $('#sound').append(' <audio controls class="say"><source src="' + theSound + '" type="audio/mp3"></audio>');
+
+
+
+
 
     })
 
 }
+
+$(document).ready(function() {
+    // Function to get input value.
+    $('#text_value').click(function() {
+        var text_value = $("#text").val();
+        if (text_value == '') {
+            alert("Enter Some Text In Input Field");
+        } else {
+            getPronunciation(text_value);
+        }
+    });
+
+    $('#text_reset').click(function() {
+        $("#text").val('');
+
+    });
+});
